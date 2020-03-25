@@ -7,7 +7,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.book_row.view.*
-import org.w3c.dom.Text
 
 class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -15,6 +14,17 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
         return ViewHolder(view)
     }
 
+    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        val title: TextView = itemView.title
+        val author: TextView = itemView.author
+        val published: TextView = itemView.publisher
+
+        init {
+            itemView.setOnClickListener{
+                Toast.makeText(itemView.context, "\"${books[adapterPosition].first_sentence}\"", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     override fun getItemCount() = books.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -23,14 +33,5 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
         holder.author.text = book.author
         holder.published.text = book.published
 
-        holder.title.setOnClickListener(
-            Toast.makeText(this, "${books[position].first_sentence}", Toast.LENGTH_LONG).show()
-        )
-    }
-
-    class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val title: TextView = itemView.title
-        val author: TextView = itemView.author
-        val published: TextView = itemView.published
     }
 }

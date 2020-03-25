@@ -1,8 +1,8 @@
 package edu.fullerton.ecs.cpsc411.restexample
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showData(books: List<Book>) {
         bookView.apply{
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(applicationContext)
             adapter = BookAdapter(books)
         }
     }
